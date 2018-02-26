@@ -79,4 +79,4 @@ Contributors:
 - Tan Truong <tntan@inetcloud.vn>
 - Hanh Le <hanhld@inetcloud.vn>
 - Duyen Tang <tttduyen@inetcloud.vn>
-- Cong Nguyen <nbcong@inetcloud.vn>
+- Cong Nguyen <nbccong@inetcloud.vn>
