@@ -1,4 +1,3 @@
-# ui
 A GUI platform
 ### Tasks to do for running the project:
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 4.2.4.
