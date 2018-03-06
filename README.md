@@ -80,3 +80,7 @@ Contributors:
 - Hanh Le <hanhld@inetcloud.vn>
 - Duyen Tang <tttduyen@inetcloud.vn>
 - Cong Nguyen <nbccong@inetcloud.vn>
+
+## Further help
+
+Check out the [README](https://github.com/iNetVN/ui/README.md).
