@@ -83,4 +83,4 @@ Contributors:
 
 ## Further help
 
-Check out the [README](https://github.com/iNetVN/ui/README.md).
+Check out the [README](https://github.com/iNetVN/ui/blob/master/README.md).
