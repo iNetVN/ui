@@ -1,12 +1,12 @@
 # Starter UI
 
-Starter is a template built with Angular 4
+Starter UI is a layout built with Angular 5 for Beginners.
 
-####Key Features Include:
+# Features Include:
+
 * iNet core
 * iNet ui
-* Angular 4
-* Language translation
+* Angular 5
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli)
 
