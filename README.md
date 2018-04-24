@@ -1,6 +1,6 @@
 # Starter UI
 
-Starter UI is a layout built with Angular 5 for Beginners.
+Starter UI is a layout built with Angular 5 for Beginners
 
 # Features Include:
 
