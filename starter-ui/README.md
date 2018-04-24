@@ -5,8 +5,9 @@ Starter for iCloud Platform
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 4.2.4.
 
+- inet-core 0.2.2
+- inet-ui 0.0.25
 - angularjs 5.0.0
-- angular-material 2.0.0
 - TypeScript 2.5
 - RxJS (This library serves as a bridge between the Reactive Extensions for JavaScript (RxJS) and AngularJS)
 https://github.com/Reactive-Extensions/RxJS
@@ -50,7 +51,7 @@ Run `ng generate component component-name` to generate a new component.
 
 You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-Example Run `ng generate component pages/marketplace` to create a new page is Marketplace
+Example Run `ng generate module pages/employee` to create a new module is Employee
 
 ## Build
 
