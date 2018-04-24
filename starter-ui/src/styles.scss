@@ -1,11 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~perfect-scrollbar/dist/css/perfect-scrollbar.min.css';
-@import "./scss/mixins";
-@import "./scss/variables";
-@import './scss/general';
-@import "./scss/sidebar";
-@import './scss/loading';
-@import './scss/app';
-
 @import '~ngx-bootstrap/datepicker/bs-datepicker.css';
+@import "~inet-ui/scss/material-theme";
+@import './scss/app';
