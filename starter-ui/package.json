@@ -34,7 +34,7 @@
     "@ngx-translate/core": "8.0.0",
     "@ngx-translate/http-loader": "2.0.0",
     "inet-core": "0.2.2",
-    "inet-ui": "0.0.25",
+    "inet-ui": "0.1.0",
     "core-js": "2.5.1",
     "jquery": "3.2.1",
     "later": "^1.2.0",

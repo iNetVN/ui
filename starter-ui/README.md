@@ -6,7 +6,7 @@ Starter for iCloud Platform
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 4.2.4.
 
 - inet-core 0.2.2
-- inet-ui 0.0.25
+- inet-ui 0.1.0
 - angularjs 5.0.0
 - TypeScript 2.5
 - RxJS (This library serves as a bridge between the Reactive Extensions for JavaScript (RxJS) and AngularJS)
