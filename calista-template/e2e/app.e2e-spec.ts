@@ -9,6 +9,6 @@ describe('HRM App', () => {
 
   it('should display application name', () => {
     page.navigateTo();
-    expect(page.getTitle()).toEqual('HRM');
+    expect(page.getTitle()).toEqual('Calista');
   });
 });
