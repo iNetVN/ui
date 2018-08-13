@@ -42,7 +42,7 @@
     "ng2-validation": "4.2.0",
     "ngx-chips": "^1.9.2",
     "later": "^1.2.0",
-    "lodash": "4.17.4",
+    "lodash": "4.17.5",
     "moment": "2.19.3",
     "photoswipe": "4.1.2",
     "resize-sensor": "0.0.6",
