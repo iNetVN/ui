@@ -21,6 +21,15 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 
 ![Bootstrap UI ](http://cdn.inetcloud.vn/data/api/git/bs-ui.png)
 
+
+Command line instructions
+===
+
+Clone a repository into a new directory
+```
+git clone https://github.com/iNetVN/ui
+```
+
 Contributors:
 ===
 - Vy Nguyen <ntvy@inetcloud.vn>
