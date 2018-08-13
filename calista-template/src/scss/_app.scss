@@ -1,0 +1,25 @@
+$toolbar-border-color: #e5e5e5;
+
+.admin-layout {
+  width: 100%;
+  background: #FFFFFF;
+  padding: 0;
+  height: 100%;
+}
+
+.breadcrumb {
+  border-bottom: 1px solid #C8C7CC;
+  margin-bottom: 0;
+}
+
+.ng2-tag-input {
+  border-bottom: none !important;
+}
+
+.lbl-bold {
+  font-weight: bold;
+}
+
+.data-table.table .badge {
+  font-size: 100%;
+}
