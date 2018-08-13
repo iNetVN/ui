@@ -16,11 +16,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Bootstrap 4 
 - ngx-bootstrap 3.0.0
 
-
 Features
 ===
 - CAS Authentication
 - Integrate with iCloud Platform modules
+- Bootstrap UI
+![Bootstrap UI ](http://cdn.inetcloud.vn/data/api/git/bs-ui.png)
 
 Build
 ===

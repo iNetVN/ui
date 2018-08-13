@@ -21,6 +21,9 @@ Features
 ===
 - CAS Authentication
 - Integrate with iCloud Platform modules
+- Material UI 
+
+![Material UI](http://cdn.inetcloud.vn/data/api/git/material-ui.png)
 
 Build
 ===
