@@ -13,8 +13,7 @@
 </app-root>
 #theme("/common/css/material")
 #theme("/common/css/bootstrap.min")
-#theme("/common/css/font-awesome")
-#theme("/common/css/grid.min")
+#theme("/common/css/font-awesome-4.7")
 
 #script("/js/common/jquery/jquery-3.2.1.min.js")
 #script("/js/common/bootstrap/bs4/plugins/popper.min.js")
@@ -22,14 +21,11 @@
 
 #script("/js/common/inet/lib/inet-core.min.js")
 #script("/js/common/inet/lib/inet-utilities.min.js")
-#script("/js/common/inet/lib/grid-3.0.min.js")
 
 #widget("/starter/widget/web-config")
-#widget("/starter/widget/permission")
 
-#script("/js/starter/{inline}", "bottom")
+#theme("/starter/css/{styles}")
+#script("/js/starter/{runtime}", "bottom")
 #script("/js/starter/{polyfills}", "bottom")
-#script("/js/starter/{styles}", "bottom")
-#script("/js/starter/{vendor}", "bottom")
 #script("/js/starter/{main}", "bottom")
 #end

@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import {CoreService} from "inet-core";
-import {MenuComponent} from "inet-ui";
 @Component({
-  selector: 'app-menu',
+  selector: 'app-custom-menu',
   templateUrl: './custom-menu.component.html'
 })
-export class CustomMenuComponent extends MenuComponent {
+export class CustomMenuComponent {
 
-  constructor(public coreService: CoreService
+  constructor(
   ) {
-    super(coreService);
+    console.log('init menu');
   }
 }

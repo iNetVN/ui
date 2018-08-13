@@ -12,6 +12,6 @@
     "homeurl": "page/index",
     "homename": "Starter",
     "homeicon": "images/starter.png",
-    "modified": "20180305"
+    "modified": "{version}"
 
 }

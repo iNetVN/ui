@@ -1,179 +1,110 @@
+require('events').EventEmitter.defaultMaxListeners = 0;
+
 var gulp = require('gulp');
 var del = require('del');
 var runSequence = require('run-sequence');
 var zip = require('gulp-zip');
 var exec = require('child_process').exec;
-var fs = require('fs-extra');
-var parser = require('json-parser');
-var replace = require('gulp-replace');
-var minify = require('gulp-minify');
+var fs = require('fs');
+
 var distFolder = "dist";
-var buildFolder = './' + distFolder + "/build";
-var cloudFolder = "icloud";
 var moduleName = "starter";
-var entryPoints = ["inline","polyfills","sw-register","styles","vendor","main"];
-var chunkFile = {}, bundleFile = {};
+var buildDir = 'dist/build';
 
-gulp.task('clean', function(cb) {
-  return del([
-    buildFolder,
-    distFolder
-  ], cb);
-});
 
-// Copy all resources
-gulp.task('copyFont', function () {
-  return gulp.src(distFolder + '/fonts/*')
-    .pipe(gulp.dest(buildFolder+ '/font'));
-});
-gulp.task('copyAssets', function () {
-  return gulp.src(distFolder + '/assets/images/**')
-    .pipe(gulp.dest(buildFolder+ '/images'));
-});
-
-gulp.task('copyJs', function () {
-  return gulp.src(distFolder + '/*.js')
-    .pipe(minify({
-      ext:{
-        src:'-debug.js',
-        min:'.js'
-      },
-      noSource: true
-    }))
-    .pipe(gulp.dest(buildFolder+ '/js'));
-});
-
-gulp.task('copyResources', function () {
-  return gulp.src(cloudFolder + '/**')
-    .pipe(gulp.dest(buildFolder));
+gulp.task('clean', function (cb) {
+    return del([
+        distFolder
+    ], cb);
 });
 
 gulp.task('replaceHTML', function () {
-  var pageFolder= '/page';
-  var pageSource = gulp.src(cloudFolder + pageFolder +  '/index.html');
-  for (var f in bundleFile) {
-    pageSource.pipe(replace('{'+ f + '}', bundleFile[f].split('/').pop())).pipe(gulp.dest(buildFolder + pageFolder));
-  }
-  return pageSource.pipe(gulp.dest(buildFolder + pageFolder));
-});
-
-gulp.task('zip',['copyFont', 'copyAssets', 'deploy', 'copyResources'], function () {
-  runSequence('copyJs',['replaceHTML'], function(){
-    return gulp.src([buildFolder + '/**'])
-      .pipe(zip(moduleName + '.zip'))
-      .pipe(gulp.dest(distFolder +'/target'))
-  });
-});
-
-gulp.task('deploy', function () {
-  var jsFolderStr = 'iNet.jsFolder + "';
-  chunkFile= {};
-  bundleFile= {};
-  try {
-    var files = fs.readdirSync(distFolder, 'utf8');
-    var __fileName;
-    for(var f in files) {
-      var __file = files[f];
-      if(!!__file && __file.startsWith('vendor.') && __file.split('.').pop()==='js') {
-        bundleFile['vendor']=distFolder + '/'+ __file;
-      }
-      if(!!__file && __file.startsWith('inline.') && __file.split('.').pop()==='js') {
-        //console.log('Parse file: ' + __file);
-        var data = fs.readFileSync(distFolder + '/'+ __file, 'utf8');
-        var text = '"." +';
-        var index = data.search(text);
-        if( index> -1) {
-          var temp = data.substring(index + text.length, data.length).trim();
-          index = temp.search("}");
-          temp = temp.substring(0, index + 1);
-          var packObj = parser.parse(temp);
-          bundleFile['inline'] = distFolder + '/' + __file;
-          for (var chunkId in packObj) {
-            if (entryPoints.indexOf(chunkId) > -1) { //bundle js
-              __fileName = distFolder + '/' + chunkId + "." + packObj[chunkId] + '.bundle.js';
-              bundleFile[chunkId] = __fileName;
-            } else {
-              __fileName = distFolder + '/' + chunkId + "." + packObj[chunkId] + '.chunk.js';
-              chunkFile[chunkId] = __fileName;
-              gulp.src([__fileName]).pipe(replace('"' + chunkId + '"', jsFolderStr + chunkId + '"')).pipe(gulp.dest(distFolder));
-            }
-          }
-          /*
-          console.log('chunkFiles:');
-          console.log(chunkFile);
-          console.log('==============================================');
-          console.log('bundleFiles:');
-          console.log(bundleFile);
-          console.log('==============================================');
-          */
-          var mainSource = gulp.src([bundleFile['main']]);
-          for (var k in chunkFile) {
-            mainSource.pipe(replace('"' + k + '"', jsFolderStr + k + '"')).pipe(gulp.dest(distFolder));
-          }
-          gulp.src([bundleFile['inline']]).pipe(replace('}[chunkId]', '}[chunkId.split(\'/\').pop()]')).pipe(gulp.dest(distFolder));
-        } else {
-          var filename = distFolder + '/main.bundle.js';
-          var mainSource = gulp.src([filename]);
-          var modules = [];
-          try {
-            var data = fs.readFileSync(filename, 'utf8');
-            var text = "var map = {";
-            var index = data.search(text);
-            var temp = data.substring(index, data.length);
-            index = temp.search(";");
-            if(index > -1) {
-              temp = temp.substring(text.length - 1, index);
-              var obj = parser.parse(temp);
-              var module;
-              for (var key in obj) {
-                for (var j = 1; j < (obj[key]).length; j++) {
-                  module = (obj[key])[j];
-                  if (!!module && modules.indexOf(module) < 0) {
-                    mainSource.pipe(replace('"' + module + '"', jsFolderStr + module + '"')).pipe(gulp.dest(distFolder));
-                    gulp.src([distFolder + '/' + module + '.chunk.js']).pipe(replace('"' + module + '"', jsFolderStr + module + '"')).pipe(gulp.dest(distFolder));
-                    modules.push(module);
-                  }
-                }
-              }
-            }
-          } catch (err) {
-          } finally {
-            for(var i=0; i < entryPoints.length; i++) {
-              bundleFile[entryPoints[i].toString()]= distFolder + '/'+ entryPoints[i] + '.bundle.js?v=$ctx.version()';
-            }
-          }
+    var files = fs.readdirSync(distFolder);
+    var indexPath = buildDir + '/page/index.html';
+    var indexData = fs.readFileSync(indexPath, 'utf-8');
+    files.forEach(function (fileName) {
+        var filePrefix = fileName.split('.')[0];
+        if (filePrefix) {
+            fileName = fileName.replace(/\.css$/, '');
+            indexData = indexData.replace('{' + filePrefix + '}', fileName);
         }
-      }
-    }
-  } catch (err) {
+    });
+    fs.writeFileSync(indexPath, indexData, 'utf-8');
+});
 
-  }
+gulp.task('replaceVersion', function () {
+    var profilePath;
+    var files = fs.readdirSync(buildDir);
+    for (var i = 0; i < files.length; i++) {
+        if (files[i].endsWith('.profile')) {
+            profilePath = buildDir + '/' + files[i];
+            break;
+        }
+    }
+    var profileData = fs.readFileSync(profilePath, 'utf-8');
+    profileData = profileData.replace('{version}', new Date().getTime());
+    fs.writeFileSync(profilePath, profileData, 'utf-8');
 });
 
 gulp.task('build', function (cb) {
-  return exec('npm run deploy',{maxBuffer: 1024 * 1024}, function(err, stdout, stderr){
-    console.log(stdout);
-    if(!err){
-      runSequence('zip');
-    } else {
-      console.log(err);
-    }
-  });
+    var ng = exec('./node_modules/.bin/ng build --aot --prod --named-chunks', {maxBuffer: 1024 * 2048}, function (err, stdou, stderr) {
+        gulp.start('package');
+        cb();
+    });
+    ng.stdout.on('data', function (data) {
+        console.log(data.toString());
+    });
+    ng.stderr.on('data', function (data) {
+        console.log(data.toString());
+    });
 });
 
-gulp.task('output', function (cb) {
-  return exec('ng build prod',{maxBuffer: 1024 * 1024}, function(err, stdout, stderr){
-    console.log(stdout);
-    if(!err){
-      runSequence('zip');
-    } else {
-      console.log(err);
+gulp.task('package', function (cb) {
+
+    runSequence('copy-resource', 'change-path-chunk', 'replaceVersion', 'replaceHTML', function () {
+        gulp.src([buildDir + '/**'])
+            .pipe(zip(moduleName + '.zip'))
+            .pipe(gulp.dest(distFolder + '/target')).on('end', cb)
+    });
+});
+
+gulp.task('copy-resource', function () {
+    return gulp.src(['icloud/**']).pipe(gulp.dest(buildDir))
+});
+
+gulp.task('change-path-chunk', function () {
+    var files = fs.readdirSync(distFolder);
+    var inlineFile;
+
+    // Find inline file
+    for (var  i =0; i < files.length; i++) {
+        if (files[i].startsWith('runtime.')) {
+            inlineFile = files[i];
+            break;
+        }
     }
-  });
+
+    // Change path load chunk file
+    var inlinePath = distFolder + '/' + inlineFile;
+    var inlineData = fs.readFileSync(inlinePath, 'utf-8');
+
+    // build with: ng build --aot --prod
+    var strSplit = '.src=';
+    var dataSplit = inlineData.split(strSplit);
+
+    dataSplit[1] = dataSplit[1].replace(/return\s.*?\+/, 'return iNet.jsFolder+');
+
+    inlineData = dataSplit.join(strSplit);
+
+    // Replace inline content
+    fs.writeFileSync(inlinePath, inlineData, 'utf-8');
+
+    gulp.src('dist/*.css').pipe(gulp.dest(buildDir + '/css'));
+
+    return gulp.src('dist/*.js').pipe(gulp.dest(buildDir + '/js'));
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', function() {
-  runSequence('clean', 'build');
+gulp.task('default', function () {
+    runSequence('clean', 'build');
 });
-
