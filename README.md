@@ -19,7 +19,7 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 
 * **calista-template** project is a creative bootstrap design admin template:
 
-![Bootstrap UI ](http://cdn.inetcloud.vn/data/api/git/bs-ui.png)
+![Bootstrap UI ](http://cdn.inetcloud.vn/data/api/git/bs-ui.png?v=1)
 
 
 Command line instructions

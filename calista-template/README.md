@@ -21,7 +21,7 @@ Features
 - CAS Authentication
 - Integrate with iCloud Platform modules
 - Bootstrap UI
-![Bootstrap UI ](http://cdn.inetcloud.vn/data/api/git/bs-ui.png)
+![Bootstrap UI ](http://cdn.inetcloud.vn/data/api/git/bs-ui.png?v=1)
 
 Build
 ===
