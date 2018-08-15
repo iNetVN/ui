@@ -3,12 +3,66 @@
         <button type="button" class="btn btn-primary btn-sm" (click)="onAdd()">
             <i class="fa fa-plus"></i> {{'TOOLBAR.ADD' | translate}}
         </button>
-        <button type="button" class="btn btn-danger btn-sm ml-1">
-            <i class="fa fa-trash"></i> {{'TOOLBAR.DELETE' | translate}}
+        <button type="button" class="btn btn-danger btn-sm ml-1" [disabled]="messageTable.selectedRows.length===0"  (click)="deleteSelected()">
+            <i class="fa fa-trash"></i> {{'TOOLBAR.DELETE' | translate}} <span *ngIf="messageTable.selectedRows.length">({{messageTable.selectedRows.length}})</span>
         </button>
     </div>
 
     <div class="cp-content">
-        Module 1 List
+        <data-table id="message-grid"
+                    headerTitle=""
+                    [page]="pageNumber"
+                    [items]="items"
+                    [itemCount]="itemCount"
+                    (reload)="load($event)"
+                    (expandClick)="expandClick($event)"
+                    (rowClick)="rowClick($event)"
+                    [limit]="10"
+                    [header]="false"
+                    [selectColumn]="true"
+                    [multiSelect]="true"
+                    [pagination_input]="true"
+                    [pagination_range]="true"
+                    [indexColumnHeader]="'#'"
+                    [selectOnRowClick]="true"
+                    [expandableRows]="true"
+                    [showReloading]="true">
+            <ng-template #dataTableExpand let-item="item">
+                <div class="col-sm-12">
+                    <blockquote>
+                        {{item.body}}
+                    </blockquote>
+                </div>
+            </ng-template>
+            <data-table-column
+                    [property]="'subject'"
+                    [header]="'Subject'">
+            </data-table-column>
+            <data-table-column
+                    [property]="'type'"
+                    [header]="'Type'"
+                    [width]="120">
+            </data-table-column>
+            <data-table-column
+                    [property]="'from'"
+                    [header]="'From'"
+                    [width]="250">
+            </data-table-column>
+            <data-table-column
+                    [property]="'uuid'"
+                    [header]=""
+                    [width]="70">
+                <ng-template #dataTableCell let-item="item">
+                        <span (click)="editItem(item, $event)" class="fts-100 badge badge-primary"><i
+                                class="fa fa-edit"></i></span>
+                    <span (click)="deleteItem(item, $event)" class="ml-1 fts-100 badge badge-danger"><i
+                            class="fa fa-trash"></i></span>
+                </ng-template>
+            </data-table-column>
+        </data-table>
+
+        <app-confirm-dialog iconCls="fa fa-trash" [title]="'MESSAGE.CONFIRM_DELETE_TITLE' | translate"
+                            [content]="'MESSAGE.CONFIRM_DELETE_MSG' | translate">
+        </app-confirm-dialog>
     </div>
 </div>
