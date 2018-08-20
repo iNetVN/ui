@@ -47,7 +47,7 @@ gulp.task('replaceVersion', function () {
 });
 
 gulp.task('build', function (cb) {
-    var ng = exec('./node_modules/.bin/ng build --aot --prod --named-chunks', {maxBuffer: 1024 * 2048}, function (err, stdou, stderr) {
+    var ng = exec('ng build --aot --prod --named-chunks', {maxBuffer: 1024 * 2048}, function (err, stdou, stderr) {
         gulp.start('package');
         cb();
     });
