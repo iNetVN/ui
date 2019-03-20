@@ -1,0 +1,26 @@
+{
+  "MENU": {
+    "HOME": "Home",
+    "TITLE": "MENU",
+    "MASTER_DATA": "Master Data",
+    "MODULE1": "Module 1",
+    "MODULE2": "Module 2"
+  },
+  "MESSAGE": {
+    "CONFIRM_DELETE_TITLE": "Delete ?",
+    "CONFIRM_DELETE_MSG": "Are you sure that you want to delete this selected item(s) ?"
+  },
+  "SEARCH": {
+    "KEYWORD": "Keyword",
+    "KEYWORD_PLH": "Keyword ...",
+    "SEARCH_LABEL": "Enter keyword to search"
+  },
+  "MODULE": {
+    "MODULE1": {
+      "TITLE": "Module 1"
+    },
+    "MODULE2": {
+      "TITLE": "Module 2"
+    }
+  }
+}

@@ -6,7 +6,7 @@ import {Module1ListComponent} from './module1-list/module1-list.component';
 import {Module1AddComponent} from './module1-add/module1-add.component';
 import {AppCommonModule} from "../../common/app-common.module";
 import {DialogModule, GridModule} from "inet-ui";
-import {Module1Service} from "./module1.service";
+import {DataService} from "../../../data/data.service";
 
 @NgModule({
     imports: [
@@ -17,7 +17,7 @@ import {Module1Service} from "./module1.service";
         DialogModule
     ],
     declarations: [Module1ListComponent, Module1AddComponent],
-    providers: [Module1Service]
+    providers: [DataService]
 })
 export class Module1Module {
 }

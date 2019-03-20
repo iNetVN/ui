@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {ConfirmDialogComponent, DataTable, DataTableResource, DataTableRow, DialogAction} from "inet-ui";
 import {TranslateService} from "@ngx-translate/core";
 import {Subscription} from "rxjs";
-import {Module1Service} from "../module1.service";
+import {DataService} from "../../../../data/data.service";
 @Component({
     selector: 'app-module1-list',
     templateUrl: './module1-list.component.html',
@@ -22,7 +22,7 @@ export class Module1ListComponent implements OnInit {
     @ViewChild(ConfirmDialogComponent) confirmDialog: ConfirmDialogComponent;
 
     constructor(
-                private service: Module1Service,
+                private dataService: DataService,
                 private router: Router,
                 private translate: TranslateService
     ) {
@@ -51,7 +51,7 @@ export class Module1ListComponent implements OnInit {
         this.dataResource.query(params).then(function () {
             this.params = params;
 
-            this.service.listMessage().subscribe(data => {
+            this.dataService.listMessage().subscribe(data => {
                 const items = data['items'];
                 this.itemCount = data['total'];
                 this.dataResource = new DataTableResource(items);
