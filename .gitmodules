@@ -1,6 +1,3 @@
 [submodule "calista-template"]
 	path = calista-template
 	url = https://github.com/iNetVN/ui/calista-template
-[submodule "starter-ui"]
-	path = starter-ui
-	url = https://github.com/iNetVN/ui/starter-ui
